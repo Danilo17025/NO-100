@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Validar Peso</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f4f8;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        h2 {
+            color: #006dae;
+            margin-bottom: 20px;
+        }
+
+        input[type="number"] {
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            width: 250px;
+            font-size: 16px;
+            margin-bottom: 20px;
+            outline: none;
+        }
+
+        input[type="number"]:focus {
+            border-color: #006dae;
+            box-shadow: 0 0 5px rgba(0, 109, 174, 0.5);
+        }
+
+        button {
+            background-color: #006dae;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #005083;
+        }
+
+        #imagenContainer, #imagenContainer2 {
+            display: none; /* Asegurarse de que esté oculto por defecto */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        #imagenContainer img, #imagenContainer2 img {
+            width: 40%; /* Tamaño reducido */
+            border-radius: 10px;
+            animation: rotar 10s linear infinite;
+        }
+
+        @keyframes rotar {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <h2>Ingrese su peso</h2>
+    <input type="number" id="pesoInput" placeholder="Ingrese el peso en kg">
+    <button onclick="validarPeso()">Validar Peso</button>
+
+    <!-- Contenedor de la imagen -->
+    <div id="imagenContainer">
+        <img src="src/0G.jpg" alt="Imagen">
+    </div>
+    <!-- Contenedor de la imagen -->
+    <div id="imagenContainer2">
+        <img src="src/calaca.jpg" alt="Imagen">
+    </div>
+
+    <!-- Reproductor de audio -->
+    <audio id="audioFondo" loop>
+        <source src="src/mix_18s.mp3" type="audio/mp3">
+        Tu navegador no soporta la etiqueta de audio.
+    </audio>
+    <!-- Reproductor de audio -->
+    <audio id="audioFondo2" loop>
+        <source src="src/alo-flacow.mp3" type="audio/mp3">
+        Tu navegador no soporta la etiqueta de audio.
+    </audio>
+
+    <script>
+        function validarPeso() {
+            const peso = document.getElementById('pesoInput').value;
+
+            // Verificar si el input está vacío
+            if (peso === '') {
+                alert('Por favor, ingrese un peso.');
+                return;
+            }
+
+            // Convertir el valor a un número
+            const pesoNumerico = parseFloat(peso);
+
+            if (pesoNumerico >= 70 && pesoNumerico <= 85 ) {
+                alert('Usted está sano');
+            } 
+            else if (pesoNumerico < 70) {
+                // Mostrar imagen y reproducir audio solo si el peso es menor a 60
+                document.getElementById('imagenContainer2').style.display = 'flex';
+                document.getElementById('audioFondo2').play();
+            }
+            else if (pesoNumerico > 85) {
+                // Mostrar imagen y reproducir audio solo si el peso es mayor a 85
+                document.getElementById('imagenContainer').style.display = 'flex';
+                document.getElementById('audioFondo').play();
+            }
+        }
+    </script>
+</body>
+</html>
